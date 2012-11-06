@@ -779,7 +779,7 @@ void Bnextname(char **name, char **nameend, char *whole, void *arg) {
 	((*name = strstr(whole, "Safari")) != NULL && (len = 6)) ||
 	((*name = strstr(whole, "WebTV")) != NULL && (len = 5)) ||
 	((*name = strstr(whole, "Opera")) != NULL && (len = 5)) ||
-	((*name = strstr(whole, "NetFront")) != NULL && (len = 8)) || 
+	((*name = strstr(whole, "NetFront")) != NULL && (len = 8)) ||
 	((*name = strstr(whole, "MSIE")) != NULL && (len = 4))) {
       *nameend = *name + len;
       if (**nameend == '/' || **nameend == ' ') {
@@ -875,11 +875,14 @@ void Pnextname(char **name, char **nameend, char *whole, void *arg) {
 	}
 	// ## 2009-02-04 SPH modification: Added support for Windows Vista & Windows 7
 	// ## 2010-02-01 Changed Win7 to Win7 & Server 2008
+  // ## 2012-11-06 Add ed support for Windows 8
 	else if (*c == '6') {
 		if (*(c+1) == '.' && (*(c+2) == '0'))
 			*name = "Windows:Windows Vista/Server 2008";
 		else if (*(c+1) == '.' && (*(c+2) == '1'))
 			*name = "Windows:Windows 7/Server 2008 R2";
+    else if (*(c+1) == '.' && (*(c+2) == '2'))
+      *name = "Windows:Windows 8/Server 2012";
 	  else {
 	    *name = "Windows:Unknown Windows (UA 6.x)";
 	  }
