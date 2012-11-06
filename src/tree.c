@@ -775,9 +775,11 @@ void Bnextname(char **name, char **nameend, char *whole, void *arg) {
 	((*name = strstr(whole, "Firefox")) != NULL && (len = 7)) ||
 	((*name = strstr(whole, "Chimera")) != NULL && (len = 7)) ||
 	((*name = strstr(whole, "Camino")) != NULL && (len = 6)) ||
+	((*name = strstr(whole, "Chrome")) != NULL && (len = 6)) ||
 	((*name = strstr(whole, "Safari")) != NULL && (len = 6)) ||
 	((*name = strstr(whole, "WebTV")) != NULL && (len = 5)) ||
 	((*name = strstr(whole, "Opera")) != NULL && (len = 5)) ||
+	((*name = strstr(whole, "NetFront")) != NULL && (len = 8)) || 
 	((*name = strstr(whole, "MSIE")) != NULL && (len = 4))) {
       *nameend = *name + len;
       if (**nameend == '/' || **nameend == ' ') {
@@ -869,12 +871,29 @@ void Pnextname(char **name, char **nameend, char *whole, void *arg) {
 	  else if (*(c + 1) == '.' && (*(c + 2) == '2'))
 	    *name = "Windows:Windows Server 2003";
 	  else
-	    *name = "Windows:Unknown Windows";
+	    *name = "Windows:Unknown Windows (v5)";
 	}
-	else if (*c >= '6' && *c <= '9')
+	// ## 2009-02-04 SPH modification: Added support for Windows Vista & Windows 7
+	// ## 2010-02-01 Changed Win7 to Win7 & Server 2008
+	else if (*c == '6') {
+		if (*(c+1) == '.' && (*(c+2) == '0'))
+			*name = "Windows:Windows Vista/Server 2008";
+		else if (*(c+1) == '.' && (*(c+2) == '1'))
+			*name = "Windows:Windows 7/Server 2008 R2";
+	  else {
+	    *name = "Windows:Unknown Windows (UA 6.x)";
+	  }
+	}
+	else if (*c == '7') {
+	  *name = "Windows:Unknown Windows (UA 7.x)";
+	}
+	else if (*c == '8') {
+	  *name = "Windows:Unknown Windows (UA 8.x)";
+	}
+	else if (*c <= '9')
 	  *name = "Windows:Unknown Windows";
 	else
-	  *name = "Windows:Windows NT";
+	  *name = "Windows:Windows NT 4.0";
       }
       else if (*c == 'C' && *(c + 1) == 'E')
 	*name = "Windows:Windows CE";
@@ -888,7 +907,7 @@ void Pnextname(char **name, char **nameend, char *whole, void *arg) {
 			     headmatch(c + 1, "illennium")))
 	*name = "Windows:Windows ME";
       else if (*c == '3' && *(c + 1) == '.' && *(c + 2) == '1')
-	*name = "Windows:Windows 3.1";
+	*name = "Windows:Windows 3.1x/NT 3.51";
       else if ((*c == '1' && *(c + 1) == '6') || strstr(c + 1, "16bit") ||
 	       strstr(c + 1, "16-bit"))
 	*name = "Windows:Windows 16-bit";

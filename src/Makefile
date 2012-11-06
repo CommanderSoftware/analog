@@ -28,9 +28,9 @@ DEFS =          # any combination of -DNOPIPES -DNODNS -DNODIRENT -DNOGLOB ...
 #                 DYNIX/ptx needs DEFS = -D_SOCKET_VERSION=11
 #                 MPE/iX needs DEFS = -D_POSIX_SOURCE -D_SOCKET_SOURCE
 #
-OS = UNIX         # Operating system: UNIX, DOS, WIN32, MAC, OS2, OSX, VMS
+OS = WIN32         # Operating system: UNIX, DOS, WIN32, MAC, OS2, OSX, VMS
 #                   RISCOS, BEOS, NEXTSTEP, MPEIX, BS2000, AS400, OS390
-LIBS = -lm  # extra libraries needed; most platforms (but not OS X or BeOS)
+LIBS = -lwsock32 -lm  # extra libraries needed; most platforms (but not OS X or BeOS)
 #               need -lm LAST
 #             if you defined HAVE_GD above you also need -lgd -lpng -ljpeg -lz
 #             if you defined HAVE_ZLIB above you also need -lz
